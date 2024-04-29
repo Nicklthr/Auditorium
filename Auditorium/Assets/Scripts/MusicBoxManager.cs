@@ -65,8 +65,6 @@ public class MusicBoxManager : MonoBehaviour
         {
             audioSource.volume += volumeUp;
             BarVolumeUpdate(audioSource.volume);
-
-            Destroy(collision.gameObject);
         }
     }
 }
