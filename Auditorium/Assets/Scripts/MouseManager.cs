@@ -13,7 +13,13 @@ public class MouseManager : MonoBehaviour
 
     private GameObject _objectMove;
     private CircleShape _objectToResize;
+    private AreaEffector2D _objectEffector;
     private bool _isClicked = false;
+
+    public float magnetudeMin = 33f;
+    public float radiusRatio = 3f;
+
+    private bool _isInteract = false;
 
     private Vector3 _worldPosition;
 
@@ -30,6 +36,7 @@ public class MouseManager : MonoBehaviour
         if ( _isClicked && _objectMove != null )
         {
             _objectMove.transform.position = _worldPosition;
+            _isInteract = true;
         }
 
         if ( _isClicked && _objectToResize != null )
@@ -38,12 +45,17 @@ public class MouseManager : MonoBehaviour
 
             float radius = Vector2.Distance( _objectToResize.transform.position, _worldPosition );
             _objectToResize.Radius = Mathf.Clamp( radius, radiusLimit.x, radiusLimit.y );
+            _objectEffector.forceMagnitude = magnetudeMin - ( radiusRatio ) + radiusRatio * _objectToResize.Radius;
+
+            _isInteract = true;
         }
 
         if ( !_isClicked )
         {
             _objectMove = null;
             _objectToResize = null;
+            _isInteract = false;
+
         }
     }
 
@@ -59,21 +71,25 @@ public class MouseManager : MonoBehaviour
 
         if ( hit.collider != null )
         {
+            if(_isInteract == true)
+            {
+                return;
+            }
+
             if ( hit.collider.CompareTag( "CenterZone" ) )
             {
 
                 Cursor.SetCursor( CenterZoneTexture, new Vector2(256, 256), CursorMode.Auto );
-
                 _objectMove = hit.collider.transform.parent.gameObject;
+                
 
             }
             else if( hit.collider.CompareTag( "OuterZone" ) )
             {
 
                 Cursor.SetCursor( OuterZoneTexture, new Vector2(256, 256), CursorMode.Auto );
-
                 _objectToResize = hit.collider.GetComponent<CircleShape>();
-
+                _objectEffector = hit.collider.GetComponent<AreaEffector2D>();
             }
         }
         else

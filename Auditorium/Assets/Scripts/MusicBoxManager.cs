@@ -64,7 +64,7 @@ public class MusicBoxManager : MonoBehaviour
         if (collision.CompareTag("Particle"))
         {
             audioSource.volume += volumeUp;
-            BarVolumeUpdate(audioSource.volume);
+            BarVolumeUpdate( audioSource.volume );
         }
     }
 }

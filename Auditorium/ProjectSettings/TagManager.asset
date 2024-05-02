@@ -9,6 +9,7 @@ TagManager:
   - MouveSkin
   - CenterZone
   - OuterZone
+  - MusicBox
   layers:
   - Default
   - TransparentFX
@@ -18,12 +19,12 @@ TagManager:
   - UI
   - Particle
   - 
+  - Glow
   - 
   - 
   - 
   - 
-  - 
-  - 
+  - Camera
   - 
   - 
   - 

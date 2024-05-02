@@ -33,7 +33,37 @@ public class Spwaner : MonoBehaviour
         Vector2 spawnPos = ( Vector2 )transform.position + Random.insideUnitCircle * spawnRadius;
         GameObject particle = Instantiate( particlePrefab, spawnPos, Quaternion.identity );
 
+        RandomizeParticleVisuals( particle );
+
         Rigidbody2D particleRb = particle.GetComponent<Rigidbody2D>();
         particleRb.velocity = transform.right * particleSpeed;
     }
+
+    void RandomizeParticleVisuals(GameObject particle)
+    {
+        if (particle == null)
+        {
+            return;
+        }
+
+        Transform note1 = particle.transform.Find("note_1");
+        Transform note2 = particle.transform.Find("note_2");
+
+        if (note1 == null || note2 == null)
+        {
+            return;
+        }
+
+        if (Random.Range(0, 2) == 0)
+        {
+            note1.gameObject.SetActive(true);
+            note2.gameObject.SetActive(false);
+        }
+        else
+        {
+            note1.gameObject.SetActive(false);
+            note2.gameObject.SetActive(true);
+        }
+    }
+
 }
