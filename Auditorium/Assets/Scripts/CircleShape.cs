@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEditor;
 
 [RequireComponent(typeof(LineRenderer))]
@@ -15,11 +16,12 @@ public class CircleShape : MonoBehaviour
 
     [Range(0, 1)]
     [SerializeField] private float _colliderMargin;
-
     #endregion
 
 
     #region Public properties
+
+    [SerializeField] public bool fadeCircle = false;
 
     public float Radius
     {
@@ -58,8 +60,22 @@ public class CircleShape : MonoBehaviour
         _circleCollider = GetComponent<CircleCollider2D>();
     }
 
+    private void OnDrawGizmos()
+    {
+        if (fadeCircle)
+        {
+            LineRenderer.startColor = new Color(1, 1, 1, 0);
+            LineRenderer.endColor = new Color(1, 1, 1, 0);
+        }
+    }
+
     private void Start()
     {
+        if (fadeCircle)
+        {
+            LineRenderer.startColor = new Color(1, 1, 1, 0);
+        }
+
         _circleCollider.offset = Vector2.zero;
 
         LineRenderer.useWorldSpace = false;
@@ -151,6 +167,30 @@ public class CircleShape : MonoBehaviour
             }
             return _circleCollider;
         }
+    }
+
+    // fonction pour faire un fade sur le lineRenderer du cercle sur 1,2 secondes
+    private IEnumerator FadeCircle()
+    {
+        float duration = 1.2f;
+        float timer = 0;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            float ratio = timer / duration;
+
+            LineRenderer.startColor = new Color(1, 1, 1, 1 - ratio);
+            LineRenderer.endColor = new Color(1, 1, 1, 1 - ratio);
+
+            yield return null;
+        }
+    }
+
+    // fonction public pour lancer la coroutine FadeCircle
+    public void StartFadeCircle()
+    {
+        StartCoroutine( FadeCircle() );
     }
 
     #endregion

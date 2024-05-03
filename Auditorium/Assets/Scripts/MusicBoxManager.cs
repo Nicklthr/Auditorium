@@ -67,4 +67,5 @@ public class MusicBoxManager : MonoBehaviour
             BarVolumeUpdate( audioSource.volume );
         }
     }
+
 }

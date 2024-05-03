@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 6444291516904452355}
   - component: {fileID: 5329597007655133965}
   - component: {fileID: 1819748956793571594}
+  - component: {fileID: 7632234954502868840}
   m_Layer: 0
   m_Name: ForceBox
   m_TagString: OuterZone
@@ -170,7 +171,7 @@ AreaEffector2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_UseGlobalAngle: 0
-  m_ForceAngle: 40
+  m_ForceAngle: 0
   m_ForceMagnitude: 100
   m_ForceVariation: 40
   m_ForceTarget: 0
@@ -408,3 +409,16 @@ MonoBehaviour:
   _segmentCount: 70
   _radius: 1
   _colliderMargin: 0
+--- !u!114 &7632234954502868840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7304279493743024530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2befc4ceec9d834b81f5c6a2b789b51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceBoxDirection: 1

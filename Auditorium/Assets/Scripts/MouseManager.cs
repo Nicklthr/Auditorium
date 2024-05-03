@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class MouseManager : MonoBehaviour
 {
@@ -61,6 +62,8 @@ public class MouseManager : MonoBehaviour
 
     public void PointerMove( InputAction.CallbackContext context )
     {
+        if ( EventSystem.current.IsPointerOverGameObject() ) { return; }
+
         Vector2 pointerPosition = context.ReadValue<Vector2>();
         _ray = Camera.main.ScreenPointToRay( pointerPosition );
         
@@ -122,4 +125,5 @@ public class MouseManager : MonoBehaviour
     }   
 
     private Ray _ray;
+
 }

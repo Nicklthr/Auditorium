@@ -10,6 +10,8 @@ TagManager:
   - CenterZone
   - OuterZone
   - MusicBox
+  - ColorChange
+  - SoundPanel
   layers:
   - Default
   - TransparentFX
